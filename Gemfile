@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # Custom gem
+gem 'rails_12factor'
 gem 'bower-rails'
 gem 'mongoid', github: 'mongoid/mongoid'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
