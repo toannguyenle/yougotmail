@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rails_12factor'
 gem 'bower-rails'
 gem 'mongoid', github: 'mongoid/mongoid'
+gem 'rspec-rails', group: :development
+gem 'bcrypt', '~> 3.1.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use SCSS for stylesheets

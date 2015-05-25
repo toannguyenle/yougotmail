@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
-  field :password, type: String
   field :email, type: String
+  field :password_digest, type: String
 
   has_many :trackingcodes
 end
