@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   delete 'users/:id' => 'users#destroy'
 
   # TRACKING CODES ROUTES
-  get 'trackingcodes/' => 'trackingcodes#index'
   get 'trackingcodes/new' => 'trackingcodes#new', as: :new_trackingcode
   get 'trackingcodes/:id' => 'trackingcodes#show', as: :trackingcode
   post 'trackingcodes/' => 'trackingcodes#create', as: :add_trackingcode
@@ -23,4 +22,5 @@ Rails.application.routes.draw do
   scope 'api', defaults: {format: :json} do
     post 'open_door/' => 'open_door#open', as: :open
   end
+  get "/*path" => "sessions#new", format: false
 end
