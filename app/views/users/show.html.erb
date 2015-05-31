@@ -1,14 +1,43 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
+  <strong>Email:</strong>
   <%= @user.email %>
 </p>
-
+<h2>List of codes</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Code</td>
+        <td>Type</td>
+        <td>Expired Date</td>
+        <td>Used Once Only</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @trackingcodes.each do |trackingcode| %>
+        <tr>
+          <td><%= trackingcode.id %></td>
+          <td><%= trackingcode.code %></td>
+          <td><%= trackingcode.type %></td>
+          <td><%= trackingcode.expiredtime %></td>
+          <td><%= trackingcode.use_once_only %></td>
+          <td>
+            <%= link_to 'Edit', edit_trackingcode_path(trackingcode) %>
+            <%= link_to 'Show', trackingcode_path(trackingcode) %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= link_to 'Add more code', new_trackingcode_path %></td>
+      </tr>
+    </tbody>
+  </table>
 <p>
-  <strong>Password:</strong>
-  <%= @user.password_digest %>
 </p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

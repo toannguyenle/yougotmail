@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*DEFAULT VALUES:*/
+$mainFont: 'Helvetica Neue';
+$shipwGreen: #4eb64e;
+$navHeight: 81px;
+
+body {
+  font-family: $mainFont;
+  background-image: url('buzzer.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  padding: $navHeight 0;
+  font-weight: 100;
+}
+
+.btn-default {
+  margin: 2px 0;
+  width: 100%;
+  color: white;
+  background-color: rgba(255,255,255,0.4);
+  font-weight: 100;
+}
+
+#sign-in {
+  background-color: rgba(255,255,255,0);
+}
+div.button-container {
+  padding: 0 1px;
+}

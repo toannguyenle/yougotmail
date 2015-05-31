@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <!-- LIST INFO -->
+    <ul class="list-group">
+      <% if eval(@product.image_urls) %>
+        <li class="list-group-item">
+          <div class="media">
+            <a class="media-left">
+              <%= image_tag(eval(@product.image_urls).first, :width => "70")%>
+            </a>
+            <div class="media-body">
+              <h5 class="media-heading"><strong><%= @product.product_name %></strong>
+              </h5>
+              by <%= @product.brand %><br/>
+              <% if @product.amazon_ASIN %>
+                <span><%= link_to(image_tag("http://g-ecx.images-amazon.com/images/G/01/gno/images/general/navAmazonLogoFooter._V169459313_.gif", :width => "70"), @product.amazon_link)%>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+      <li class="list-group-item"> <strong> Review </strong> <%= @product.review %></li>
+      <li class="list-group-item"> <strong> Category </strong> <%= @product.category %></li>
+      <li class="list-group-item"> <strong> Price </strong> <%= @product.avg_price %></li>
+      <li class="list-group-item"> <strong> Rating </strong> <%= @product.rating %></li>
+      <% if current_user %>
+        <% if @product.user.id == current_user.id %>
+          <li class="list-group-item"> <strong> Opened on </strong> <%= @product.date_first_use %></li>
+          <li class="list-group-item"> <strong> Expired on </strong> <%= @product.date_expired %></li>
+          <li class="list-group-item text-center">
+            <span class="label label-warning">belongs to <%= link_to(@product.user.name, user_path(@product.user)) if @product.user %></span>
+            <span class="label label-info"><%= link_to 'Edit item', edit_product_path(@product), :style => "color:white" %></span>
+            <span class="label label-danger"><%= link_to 'Delete item', @product, method: :delete, data: {confirm: 'Are you sure?'}, :style => "color:white" %></span>
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
