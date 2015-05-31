@@ -7,9 +7,7 @@ class TrackingcodesController < ApplicationController
   end
 
   def show
-    trackingcode = Trackingcode.find(params[:id])
-    trackingcode = trackingcode_params
-    render json: trackingcode, status: 201
+    @trackingcode = Trackingcode.find(params[:id])
   end
 
   def new
@@ -48,7 +46,7 @@ class TrackingcodesController < ApplicationController
   private
 
     def trackingcode_params
-      params.require(:trackingcode).permit(:code, :type, :id, :expiredtime, :use_once_only)
+      params.require(:trackingcode).permit(:code, :type, :expiredtime, :use_once_only)
     end
     # Make sure only logged in user can see other user list
     def make_sure_logged_in

@@ -22,9 +22,9 @@
       <%= f.password_field :password, help: 'Must be at least 6 characters long' %>
       <%= f.password_field :password_confirmation %>
       <%= f.check_box :accept_terms, label: 'Accept terms.', checked: true %>
-      <%= f.submit 'Create my account', :class => 'btn btn-primary btn-lg btn-block'%>
+      <%= f.submit 'Create my account', :class => 'btn btn-default'%>
     <% end %>
-    <p>Have an account? <%= link_to('Log in', new_sessions_path) %></p>
+    <p>Have an account? <%= link_to('Log in', login_path) %></p>
   </div>
 </div>
 

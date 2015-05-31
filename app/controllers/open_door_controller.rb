@@ -1,11 +1,11 @@
 class OpenDoorController < ApplicationController
   def open
     # TO DO: devide model and look up by device id
-    response = {}
+    response = {status: 'Access Denied'}
     begin
-      trackingcode = Trackingcode.where(code:params[:code]).first
       user = User.where(email:params[:email]).first
-      if trackingcode.user_id == user.id
+      trackingcode = Trackingcode.where(code:params[:code], user_id:user.id).first
+      if trackingcode
         response['status'] = "Access Granted"
       end
     rescue

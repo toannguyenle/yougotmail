@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     if user.save
       # the moment you sign up it logs  you in
       session[:user_id] = user.id.to_s
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), notice: "Logged in."
     else
       redirect_to new_user_path
     end

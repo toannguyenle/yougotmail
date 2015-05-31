@@ -4,12 +4,12 @@
     <% if @notice %>
       <h2>notice</h2>
     <% end %>
-    <%= bootstrap_form_for(@user, {url: sessions_path}) do |f| %>
+    <%= bootstrap_form_for(@user, {url: login_path}) do |f| %>
       <%= f.email_field :email%>
       <%= f.password_field :password%>
       <%= f.check_box :remember_me, label: 'Remember me!', checked: true %>
       <%= f.submit 'Sign in', :class => 'btn btn-default'%>
     <% end %> 
-    <p>Don't have an account? <%= link_to('Sign up', new_user_path) %></p>
+    <p>Don't have an account? <%= link_to('Sign up', signup_path) %></p>
   </div>
 </div>
