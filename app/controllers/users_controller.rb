@@ -6,9 +6,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @trackingcodes = Trackingcode.where(user_id:@user.id)
-    
+    begin
+      @trackingcodes = Trackingcode.where(user_id:@user.id)
+    rescue
+      redirect_to new_sessions_path
+    end
   end
 
   def new
@@ -23,18 +25,16 @@ class UsersController < ApplicationController
     if user.save
       # the moment you sign up it logs  you in
       session[:user_id] = user.id.to_s
-      redirect_to user_path
+      redirect_to user_path(current_user)
     else
       redirect_to new_user_path
     end
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to user_path(@user)
     else
@@ -43,7 +43,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    u = User.where(id:params[:id]).first
     # If person is logged in than log them out
     if u.id === current_user.id
     reset_session
@@ -63,7 +62,11 @@ class UsersController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      begin
+        @user = User.find(params[:id])
+      rescue
+        redirect_to new_sessions_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

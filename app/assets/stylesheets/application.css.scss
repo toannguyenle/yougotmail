@@ -18,25 +18,29 @@
 
 /*DEFAULT VALUES:*/
 $mainFont: 'Helvetica Neue';
-$shipwGreen: #4eb64e;
 $navHeight: 81px;
 
 body {
   font-family: $mainFont;
-  background-image: url('buzzer.jpg');
+  font-weight: 100;
+  background-image: url('lock1.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
   padding: $navHeight 0;
-  font-weight: 100;
 }
 
+#logo {
+  font-family: $mainFont;
+  font-size: 5em;
+  font-weight: 100;
+}
 .btn-default {
   margin: 2px 0;
   width: 100%;
-  color: white;
-  background-color: rgba(255,255,255,0.4);
+  border: 2px solid black;
+  background-color: rgba(255,255,255,0.2);
   font-weight: 100;
 }
 

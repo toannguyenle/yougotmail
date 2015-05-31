@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   resource :sessions, only: [:new, :create, :destroy]
   # PAGE ROUTES
-  get '/' => 'application#index', as: :root
+  get '/' => 'sessions#new', as: :root
   # USER ROUTES
-  get 'users/' => 'users#index'
   get 'users/new' => 'users#new', as: :new_user
   get 'users/:id' => 'users#show', as: :user
   post 'users/' => 'users#create'
@@ -13,7 +12,6 @@ Rails.application.routes.draw do
 
   # TRACKING CODES ROUTES
   get 'trackingcodes/' => 'trackingcodes#index'
-  get 'trackingcodes/expired' => 'trackingcodes#index', as: :expired_trackingcodes
   get 'trackingcodes/new' => 'trackingcodes#new', as: :new_trackingcode
   get 'trackingcodes/:id' => 'trackingcodes#show', as: :trackingcode
   post 'trackingcodes/' => 'trackingcodes#create', as: :add_trackingcode

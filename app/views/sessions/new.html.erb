@@ -1,6 +1,15 @@
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
-    <h1>Log in</h1>
+  <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-xs-10 col-sm-4 col-md-3">
+    <h2 id="logo">beep🔑</h2>
+    <% if notice %>
+      <h2>notice</h2>
+    <% end %>
+    <%= bootstrap_form_for(@user, {url: sessions_path}) do |f| %>
+      <%= f.email_field :email%>
+      <%= f.password_field :password%>
+      <%= f.check_box :remember_me, label: 'Remember me!', checked: true %>
+      <%= f.submit 'Sign in', :class => 'btn btn-default'%>
+    <% end %>
+    <p>Don't have an account? <%= link_to('Sign up', new_user_path) %></p>
   </div>
 </div>
-<%= render 'form' %>
