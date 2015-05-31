@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   delete 'users/:id' => 'users#destroy'
 
   # TRACKING CODES ROUTES
+  get 'trackingcodes/' => 'trackingcodes#index'
+  get 'trackingcodes/expired' => 'trackingcodes#index', as: :expired_trackingcodes
   get 'trackingcodes/new' => 'trackingcodes#new', as: :new_trackingcode
   get 'trackingcodes/:id' => 'trackingcodes#show', as: :trackingcode
   post 'trackingcodes/' => 'trackingcodes#create', as: :add_trackingcode
