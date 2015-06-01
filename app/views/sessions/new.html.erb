@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-xs-10 col-sm-4 col-md-3">
     <h2 id="logo">beep🔑</h2>
-    <% if @notice %>
-      <h2>notice</h2>
-    <% end %>
+    <p id="notice"><%= notice %></p>
     <%= bootstrap_form_for(@user, {url: login_path}) do |f| %>
       <%= f.email_field :email%>
       <%= f.password_field :password%>

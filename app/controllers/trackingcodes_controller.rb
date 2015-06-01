@@ -40,7 +40,7 @@ class TrackingcodesController < ApplicationController
   def destroy
     trackingcode = Trackingcode.find(params[:id])
     trackingcode.destroy
-    redirect_to user_path
+    redirect_to user_path(current_user)
   end
 
   private
@@ -51,7 +51,7 @@ class TrackingcodesController < ApplicationController
     # Make sure only logged in user can see other user list
     def make_sure_logged_in
       if !current_user 
-        redirect_to new_sessions_path
+        redirect_to new_session_path
       end
     end
 end
