@@ -1,11 +1,6 @@
 class TrackingcodesController < ApplicationController
   before_action :make_sure_logged_in, only: [:index, :show, :create, :destroy, :update]
 
-  def index
-    trackingcodes = Trackingcode.all
-    trackingcodes = params
-  end
-
   def show
     @trackingcode = Trackingcode.find(params[:id])
   end
@@ -31,16 +26,16 @@ class TrackingcodesController < ApplicationController
   def update
     @trackingcode = Trackingcode.find(params[:id])
     if @trackingcode.update_attributes(trackingcode_params)
-      redirect_to trackingcode_path(@trackingcode)
+      redirect_to user_path(current_user), notice: "Code #{@trackingcode.code} updated."
     else
-      redirect_to edit_trackingcode_path(@trackingcode)
+      redirect_to edit_trackingcode_path(@trackingcode), notice: "Please update code again."
     end
   end
 
   def destroy
     trackingcode = Trackingcode.find(params[:id])
     trackingcode.destroy
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: "Code #{params[:id]} deleted."
   end
 
   private
@@ -51,7 +46,7 @@ class TrackingcodesController < ApplicationController
     # Make sure only logged in user can see other user list
     def make_sure_logged_in
       if !current_user 
-        redirect_to new_session_path
+        redirect_to login_path
       end
     end
 end

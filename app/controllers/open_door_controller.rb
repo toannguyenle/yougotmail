@@ -1,12 +1,18 @@
 class OpenDoorController < ApplicationController
   def open
     # TO DO: devide model and look up by device id
-    response = {status: 'Access Denied'}
+    response = {}
+    response['status'] = "Access Denied"
     begin
       user = User.where(email:params[:email]).first
       trackingcode = Trackingcode.where(code:params[:code], user_id:user.id).first
       if trackingcode
         response['status'] = "Access Granted"
+        # Post access granted processing
+        # Check if code is only a one time thing
+        # if trackingcode.use_once_only
+        #   trackingcode.destroy()
+        # end
       end
     rescue
       response['status'] = "Access Denied"
@@ -16,6 +22,15 @@ class OpenDoorController < ApplicationController
       response['email'] = params[:email]
     end
 
+    # Writing log file for user
+    log = Log.new
+    log.user = user
+    log.params ="Email: #{params[:email]} - Code: #{params[:code]}"
+    log.fromdevice = params[:device_id]
+    log.response = response['status']
+    log.save()
+
+    # Business as usual
     render json: response, status: 200
   end
 

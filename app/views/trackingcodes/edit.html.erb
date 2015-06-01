@@ -6,7 +6,8 @@
       <%= f.select :type, ["Instacart", "Postmates", "Sprig", "Package Delivery"], :include_blank => true %>
       <%= f.date_field :expiredtime, :value =>Date.today + 1.week%>
       <%= f.check_box :use_once_only, label: 'Expired after first use?'%>
-      <%= f.submit 'Add Code', :class => 'btn btn-default'%>
+      <%= f.check_box :never_expired, label: 'Never Expired?'%>
+      <%= f.submit 'Update', :class => 'btn btn-default'%>
     <% end %>
   </div>
 </div>

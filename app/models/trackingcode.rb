@@ -4,6 +4,7 @@ class Trackingcode
   field :type, type: String
   field :expiredtime, type: Date
   field :use_once_only, type: Mongoid::Boolean
+  field :never_expired, type: Mongoid::Boolean
 
   belongs_to :user
 end

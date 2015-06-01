@@ -6,6 +6,8 @@
       <%= f.password_field :password_confirmation %>
       <%= f.check_box :accept_terms, label: 'Sign up for emails.', checked: true %>
       <%= f.submit 'Update my profile', :class => 'btn btn-default'%>
+      <%= link_to 'Delete my account', current_user, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'left' %>
+      - <%= @user.email %>
     <% end %>
   </div>
 </div>

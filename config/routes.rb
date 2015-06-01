@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # USER ROUTES
   get 'users/new' => 'users#new', as: :new_user
   get 'users/:id' => 'users#show', as: :user
+  get 'users/:id/logs' => 'users#log', as: :log
   post 'users/' => 'users#create'
   get 'users/:id/edit' => 'users#edit', as: :edit_user
   patch 'users/:id' => 'users#update'
