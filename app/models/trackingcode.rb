@@ -6,5 +6,7 @@ class Trackingcode
   field :use_once_only, type: Mongoid::Boolean
   field :never_expired, type: Mongoid::Boolean
 
+  validates :code, presence: true
+
   belongs_to :user
 end

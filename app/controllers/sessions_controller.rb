@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
   def new
-    # Present an empty login form
-    @user = User.new
+    if current_user
+      redirect_to user_path(current_user)
+    else
+      # Present an empty login form
+      @user = User.new
+    end
   end
 
   def create
