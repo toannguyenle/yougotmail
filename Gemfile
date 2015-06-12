@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # Custom gem
+gem 'newrelic_rpm'
 gem 'bower-rails'
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'mongoid-rspec'
