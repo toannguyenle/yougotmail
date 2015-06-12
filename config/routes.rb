@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # API routes
   scope 'api', defaults: {format: :json} do
     post 'open_door/' => 'open_door#open', as: :open
+    get 'open_door/' => 'open_door#buzzin', as: :buzzin
   end
   get "/*path" => "sessions#new", format: false
 end

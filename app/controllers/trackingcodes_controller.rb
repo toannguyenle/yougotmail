@@ -41,7 +41,7 @@ class TrackingcodesController < ApplicationController
   private
 
     def trackingcode_params
-      params.require(:trackingcode).permit(:code, :type, :expiredtime, :use_once_only)
+      params.require(:trackingcode).permit(:code, :type, :valid_date, :use_once_only, :valid_from, :valid_to)
     end
     # Make sure only logged in user can see other user list
     def make_sure_logged_in
