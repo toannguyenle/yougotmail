@@ -18,9 +18,11 @@
       <% end %>
       <%= f.text_field :name%>
       <%= f.email_field :email%>
+      <%= f.telephone_field :email%>
       <%= f.password_field :password, help: 'Must be at least 6 characters long' %>
       <%= f.password_field :password_confirmation %>
       <%= f.check_box :accept_terms, label: 'Accept terms.', checked: true %>
+      <%= f.check_box :allow_notifications, label: 'Allow notifications.', checked: true %>
       <%= f.submit 'Create my account', :class => 'btn-default'%>
     <% end %>
   </div>

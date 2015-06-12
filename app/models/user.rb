@@ -14,8 +14,10 @@ class User
 
   field :name,         :type => String
   field :email,         :type => String
+  field :phone,         :type => String
   field :password_digest, :type => String
   field :accept_terms, type: Mongoid::Boolean
+  field :allow_notifications, type: Mongoid::Boolean
   
   validates :email, presence: true, email: true, uniqueness: true
   validates :password, confirmation: true, length: { minimum: 6 }

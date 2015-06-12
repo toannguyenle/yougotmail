@@ -7,6 +7,7 @@ class Trackingcode
   field :valid_to, type: DateTime
   field :use_once_only, type: Mongoid::Boolean
   field :never_expired, type: Mongoid::Boolean
+  field :is_active, type: Mongoid::Boolean
 
   validates :code, presence: true
 

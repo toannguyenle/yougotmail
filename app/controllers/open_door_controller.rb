@@ -1,3 +1,5 @@
+# require 'rubygems'
+# require 'twilio-ruby' 
 class OpenDoorController < ApplicationController
   def open
     # TO DO: devide model and look up by device id
@@ -16,6 +18,24 @@ class OpenDoorController < ApplicationController
         # if trackingcode.use_once_only
         #   trackingcode.destroy()
         # end
+
+        # Send SMS Notification
+        if user.allow_notifications
+          # put your own credentials here 
+          account_sid = ENV["TWILIO_SID"]
+          auth_token = ENV["TWILIO_TOKEN"]
+           
+          # set up a client to talk to the Twilio REST API 
+          @client = Twilio::REST::Client.new account_sid, auth_token 
+          
+          message_body = params[:code] + ' at ' + Time.now + ' - Access Granted'
+
+          @client.account.messages.create({
+            :from => '+14153196877', 
+            :to => user.phone, 
+            :body => message_body,  
+          })
+        end
       end
     rescue
       response['status'] = "Access Denied"
