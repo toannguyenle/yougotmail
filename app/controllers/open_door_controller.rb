@@ -3,7 +3,6 @@ require 'twilio-ruby'
 class OpenDoorController < ApplicationController
   def buzzin
     # TO DO: devide model and look up by device id
-    raise
     response = {}
     response['status'] = "Access Denied"
     # Response time in seconds
