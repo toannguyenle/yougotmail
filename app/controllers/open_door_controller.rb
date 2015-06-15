@@ -1,5 +1,5 @@
-# require 'rubygems'
-# require 'twilio-ruby' 
+require 'rubygems'
+require 'twilio-ruby' 
 class OpenDoorController < ApplicationController
   def open
     # TO DO: devide model and look up by device id
