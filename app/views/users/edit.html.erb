@@ -5,8 +5,8 @@
       <%= f.telephone_field :phone%>
       <%= f.password_field :password, help: 'Must be at least 6 characters long' %>
       <%= f.password_field :password_confirmation %>
-      <%= f.check_box :accept_terms, label: 'Sign up for emails.', checked: true %>
-      <%= f.check_box :allow_notifications, label: 'Allow SMS notifications', checked: true %>
+      <%= f.check_box :accept_terms, label: 'Sign up for emails.'%>
+      <%= f.check_box :allow_notifications, label: 'Allow SMS notifications'%>
       <%= f.submit 'Update my profile', :class => 'btn btn-default'%>
       <%= link_to 'Delete my account', current_user, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'left' %>
       - <%= @user.email %>

@@ -21,7 +21,6 @@ class User
   
   validates :email, presence: true, email: true, uniqueness: true
   validates :password, confirmation: true, length: { minimum: 6 }
-  validates :accept_terms, acceptance: true
   validates :password_confirmation, presence: true
 
   has_many :trackingcodes, dependent: :destroy
