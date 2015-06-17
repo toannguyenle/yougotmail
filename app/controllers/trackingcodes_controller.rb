@@ -12,6 +12,7 @@ class TrackingcodesController < ApplicationController
   def create
     trackingcode = Trackingcode.new(trackingcode_params)
     trackingcode.user = current_user
+    trackingcode.is_active = True
     if trackingcode.save
       redirect_to user_path(current_user)
     else
@@ -41,7 +42,7 @@ class TrackingcodesController < ApplicationController
   private
 
     def trackingcode_params
-      params.require(:trackingcode).permit(:code, :type, :valid_date, :use_once_only, :valid_from, :valid_to)
+      params.require(:trackingcode).permit(:code, :type, :valid_date, :use_once_only, :valid_from, :valid_to, :is_active)
     end
     # Make sure only logged in user can see other user list
     def make_sure_logged_in

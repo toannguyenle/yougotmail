@@ -12,4 +12,5 @@ class Trackingcode
   validates :code, presence: true
 
   belongs_to :user
+
 end

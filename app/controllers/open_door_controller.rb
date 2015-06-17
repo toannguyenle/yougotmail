@@ -7,17 +7,12 @@ class OpenDoorController < ApplicationController
     response['status'] = "Access Denied"
     # Response time in seconds
     response['opentime'] = 0
+    raise
     begin
       user = User.where(email:params[:email]).first
       trackingcode = Trackingcode.where(code:params[:code], user_id:user.id).first
-      if trackingcode
-        response['status'] = "Access Granted"
-        response['opentime'] = 2
-        # Post access granted processing
-        # Check if code is only a one time thing
-        # if trackingcode.use_once_only
-        #   trackingcode.destroy()
-        # end
+      if trackingcode && trackingcode.is_active
+        # Pre access granted processing
         # Send SMS Notification
         if user.allow_notifications
           # put your own credentials here 
@@ -27,7 +22,7 @@ class OpenDoorController < ApplicationController
           # set up a client to talk to the Twilio REST API 
           @client = Twilio::REST::Client.new account_sid, auth_token 
           
-          message_body = (Time.now).to_s + ' - Front Door was opened by code: ' + params[:code] + ' ' + trackingcode.type + ' - Access Granted'
+          message_body = (Time.now).to_s + ' - Front Door was opened by code: ' + params[:code] + ' ' + trackingcode.type + ' by ' + params[:device_id]
 
           @client.account.messages.create({
             :from => '+14153196877', 
@@ -35,10 +30,19 @@ class OpenDoorController < ApplicationController
             :body => message_body,  
           })
         end
+
+        # Delete if code only used once
+        if trackingcode.use_once_only
+          trackingcode.delete()
+        end
+
+        # Granted Access after everything has been done
+        response['status'] = "Access Granted"
       end
     rescue
       response['status'] = "Access Denied"
     ensure
+      response['opentime'] = params[:opentime]
       response['code'] = params[:code]
       response['device_id'] = params[:device_id]
       response['email'] = params[:email]
