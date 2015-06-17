@@ -17,7 +17,7 @@
       <%= f.select :type, ["Instacart", "Postmates", "Sprig", "Package Delivery"], :include_blank => true %>
       <%= f.datetime_field :valid_date, :value =>Date.today + 1.week %>
       <%= f.time_field :valid_from, :value =>Time.now %>
-      <%= f.time_field :valid_to, :value =>Time.now + 1.hour %>
+      <%= f.time_field :valid_to, :value =>Time.now %>
       <%= f.check_box :use_once_only, label: 'Expired after first use', :checked => true %>
       <%= f.check_box :never_expired, label: 'Never expired'%>
       <%= f.submit 'Add', :class => 'btn btn-default'%>

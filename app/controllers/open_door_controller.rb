@@ -7,7 +7,6 @@ class OpenDoorController < ApplicationController
     response['status'] = "Access Denied"
     # Response time in seconds
     response['opentime'] = 0
-    raise
     begin
       user = User.where(email:params[:email]).first
       trackingcode = Trackingcode.where(code:params[:code], user_id:user.id).first
