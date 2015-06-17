@@ -10,6 +10,8 @@
       <%= f.submit 'Update my profile', :class => 'btn btn-default'%>
       <%= link_to 'Delete my account', current_user, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'left' %>
       - <%= @user.email %>
+      <%= link_to 'Dashboard', user_path(current_user) %>
+      <%= link_to 'Sign out ⎋', logout_path %>
     <% end %>
   </div>
 </div>

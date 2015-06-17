@@ -14,7 +14,7 @@
     <h2>Add Code for <%= current_user.name %></h2>
     <%= bootstrap_form_for(@trackingcode) do |f| %>
       <%= f.text_field :code%>
-      <%= f.select :type, ["Instacart", "Postmates", "Sprig", "Package Delivery"], :include_blank => true %>
+      <%= f.select :type, ["Personal", "On Demand Services", "Package Delivery", "Other"], :include_blank => true %>
       <%= f.datetime_field :valid_date, :value =>Date.today + 1.week %>
       <%= f.time_field :valid_from, :value =>Time.now %>
       <%= f.time_field :valid_to, :value =>Time.now %>
@@ -22,6 +22,8 @@
       <%= f.check_box :never_expired, label: 'Never expired'%>
       <%= f.submit 'Add', :class => 'btn btn-default'%>
     <% end %>
+    <%= link_to 'Dashboard', user_path(current_user) %>
+    <%= link_to 'Sign out ⎋', logout_path %>
   </div>
 </div>
 

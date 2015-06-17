@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def show
     begin
       @trackingcodes = Trackingcode.where(user_id:@user.id)
+      @logs = Log.where(user_id:@user.id).reverse.first(3)
     rescue
       redirect_to login_path, notice: "Please log in."
     end
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
 
   def log
     begin
-      @logs = Log.where(user_id:@user.id)
+      @logs = Log.where(user_id:@user.id).reverse.first(20)
     rescue
       redirect_to user_path(current_user), notice: "Can't access logs."
     end

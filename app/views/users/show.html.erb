@@ -38,5 +38,14 @@
 
     <%= link_to 'Sign out ⎋', logout_path %>
     <%= link_to 'Logs', log_path(current_user) %>
+    <table class="table table-hover">
+      <tbody>
+        <% @logs.each do |log| %>
+          <tr>
+            <td><%= distance_of_time_in_words(log.created_at, Time.now, include_seconds: true) + ' ago| ' + log.fromdevice + '| ' + log.response%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
