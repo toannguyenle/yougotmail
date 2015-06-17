@@ -16,13 +16,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@import url("http://fonts.googleapis.com/css?family=Palanquin:100,400");
 /*DEFAULT VALUES:*/
-$mainFont: 'Helvetica Neue';
+$mainFont: 'Palanquin', sans-serif;
 $navHeight: 81px;
 
 body {
   font-family: $mainFont;
-  font-weight: 100;
   background-image: url('lock1.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -34,7 +34,6 @@ body {
 #logo {
   font-family: $mainFont;
   font-size: 5em;
-  font-weight: 100;
 }
 
 .btn-default {
@@ -42,7 +41,6 @@ body {
   width: 100%;
   border: 2px solid black;
   background-color: rgba(255,255,255,0.2);
-  font-weight: 100;
 }
 
 #sign-in {
