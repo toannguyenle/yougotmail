@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Custom gem
-gem 'twilio-ruby'
+gem 'httparty'
 gem 'newrelic_rpm'
 gem 'bower-rails'
 gem 'mongoid', github: 'mongoid/mongoid'

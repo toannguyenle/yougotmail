@@ -1,5 +1,5 @@
-require 'rubygems' # not necessary with ruby 1.9 but included for completeness
-require 'twilio-ruby'
+require 'httparty'
+require 'json'
 class OpenDoorController < ApplicationController
   def buzzin
     # TO DO: devide model and look up by device id
@@ -10,27 +10,11 @@ class OpenDoorController < ApplicationController
     begin
       user = User.where(email:params[:email]).first
       trackingcode = Trackingcode.where(code:params[:code], user_id:user.id).first
+      trackingcode_type = ''
       if trackingcode && trackingcode.is_active
         # Pre access granted processing
-        # Send SMS Notification
-        if user.allow_notifications
-          # put your own credentials here 
-          account_sid = ENV['TWILIO_SID']
-          auth_token = ENV['TWILIO_TOKEN']
-           
-          # set up a client to talk to the Twilio REST API 
-          @client = Twilio::REST::Client.new account_sid, auth_token 
-          
-          message_body = (Time.now).to_s + ' - Front Door was opened by code: ' + params[:code] + ' ' + trackingcode.type + ' by ' + params[:device_id]
-
-          @client.account.messages.create({
-            :from => '+14153196877', 
-            :to => user.phone, 
-            :body => message_body,  
-          })
-        end
-
         # Delete if code only used once
+        trackingcode_type = trackingcode.type
         if trackingcode.use_once_only
           trackingcode.delete()
         end
@@ -38,6 +22,21 @@ class OpenDoorController < ApplicationController
         # Granted Access after everything has been done
         response['status'] = "Access Granted"
       end
+
+      # Send SMS Notification
+      if user.allow_notifications
+        # Send push notifications
+        message = response['status'] + ' by code ' + params[:code] + ' ' + trackingcode_type + ' from ' + params[:device_id] + '.'
+        tokens = {}
+        tokens[:device] = 'toan_ip_6'
+        tokens[:title]  = 'Front Door Buzzer'
+        tokens[:user] = ENV['PUSHOVER_USER']
+        tokens[:token] = ENV['PUSHOVER_BEEP']
+        tokens[:message] = message
+
+        HTTParty.post('https://api.pushover.net/1/messages.json', body:tokens)
+      end
+
     rescue
       response['status'] = "Access Denied"
     ensure
