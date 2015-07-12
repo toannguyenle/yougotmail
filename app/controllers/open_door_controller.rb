@@ -5,8 +5,9 @@ class OpenDoorController < ApplicationController
     # TO DO: devide model and look up by device id
     response = {}
     response['status'] = "Access Denied"
-    # Response time in seconds
+    # Default Response time in seconds
     response['opentime'] = 0
+    opentime = 2
     begin
       user = User.where(email:params[:email]).first
       trackingcode = Trackingcode.where(code:params[:code], user_id:user.id).first
@@ -15,6 +16,9 @@ class OpenDoorController < ApplicationController
         # Pre access granted processing
         # Delete if code only used once
         trackingcode_type = trackingcode.type
+        if trackingcode_type == 'Personal'
+          opentime = 5
+        end
         if trackingcode.use_once_only
           trackingcode.delete()
         end
@@ -40,7 +44,7 @@ class OpenDoorController < ApplicationController
     rescue
       response['status'] = "Access Denied"
     ensure
-      response['opentime'] = params[:opentime]
+      response['opentime'] = opentime
       response['code'] = params[:code]
       response['device_id'] = params[:device_id]
       response['email'] = params[:email]

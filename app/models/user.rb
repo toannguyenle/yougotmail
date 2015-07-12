@@ -14,8 +14,8 @@ class User
 
   field :name,         :type => String
   field :email,         :type => String
-  field :phone,         :type => String
   field :password_digest, :type => String
+  field :switch, type: Mongoid::Boolean
   field :accept_terms, type: Mongoid::Boolean
   field :allow_notifications, type: Mongoid::Boolean
   
