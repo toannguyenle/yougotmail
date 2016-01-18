@@ -5,6 +5,8 @@ gem 'httparty'
 gem 'newrelic_rpm'
 gem 'bower-rails'
 gem 'mongoid', github: 'mongoid/mongoid'
+gem 'mongo'
+gem 'bson_ext'
 gem 'mongoid-rspec'
 group :production do
   #gem for heroku to handle assets
